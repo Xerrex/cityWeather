@@ -5,11 +5,14 @@ function ForecastDay(props){
     const today = new Date(forecast.dt*1000);
 
     const days=["Sun", "Mon", "Tue","Wed", "Thurs","Fri", "Sat"];
-    const base_iconURL = "http://openweathermap.org/img/wn/";
+    
+    const baseIconURL = "http://openweathermap.org/img/wn/";
+    const icon_size = "@2x.png";
+    const icon_src = `${baseIconURL}${forecast.weather[0].icon}${icon_size}`;
 
     return <div className="forecastday-container">
         <div className="image">
-            <img src={`${base_iconURL}${forecast.weather[0].icon}@2x.png`} alt="weather icon"/>
+            <img src={icon_src} alt="weather icon"/>
         </div>
         <div className="text">
             {days[today.getDay()]}

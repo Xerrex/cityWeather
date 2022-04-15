@@ -33,26 +33,21 @@ class App extends React.Component{
     const params = `q=${cityName}&appid=${api_ID}&units=${units}`
     const URL = `${base_api_url}${params}`;
 
-    const base_iconURL = "http://openweathermap.org/img/wn/";
-    const icon_size = "@2x.png";
-    
     axios.get(URL)
     .then((res)=>{
       return res.data;
     })
     .then((data)=> {
-      const todays_date =this.getDateFromTimestamp(data.dt);
-      const iconURL = `${base_iconURL}${data.weather[0].icon}${icon_size}`;
-      const isDay = this.isDayCheck(data.dt, data.sys.sunrise);
+      const todays_date = data.dt;
       this.getLocationWeatherForecast(data.coord)
 
       this.setState({
         isLoading:false,
         todays_date: todays_date,
-        temp_c: data.main.temp,
-        isDay: isDay,
-        text: data.weather[0].description,
-        iconURL: iconURL
+        main_data: data.main,
+        weather_data: data.weather[0],
+        sys_data: data.sys,
+        wind_data: data.wind,
       });
     })
     .catch((error)=>{
@@ -60,27 +55,6 @@ class App extends React.Component{
     });
   }
 
-  getDateFromTimestamp(UNIX_timestamp){
-    let a = new Date(UNIX_timestamp * 1000);
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const year = a.getFullYear();
-    const month = months[a.getMonth()];
-    const date = a.getDate();
-    const hour = a.getHours();
-    const min = a.getMinutes();
-    const sec = a.getSeconds();
-    const full_time = `${date} ${month} ${year} ${hour}:${min}:${sec}`;
-    return full_time;
-  }
-
-  isDayCheck(current_time, sunrise_time){
-    if (current_time < sunrise_time){
-        return false;
-    }
-    else{
-      return true;
-    }
-  }
 
   getLocationWeatherForecast(coord){
     const {lat, lon} = coord
@@ -108,7 +82,9 @@ class App extends React.Component{
   }
 
   render(){
-    const  { isLoading, todays_date, cityName, temp_c, isDay, text, iconURL, daysForecast}= this.state;
+    const  { isLoading, todays_date, 
+      cityName, main_data, weather_data, 
+      sys_data, wind_data, daysForecast }= this.state;
 
     return(
       <div className="app-container">
@@ -119,10 +95,10 @@ class App extends React.Component{
               <TopSection
                 todays_date={todays_date}
                 location={cityName}
-                temp_c={temp_c}
-                isDay={isDay}
-                text= {text}
-                iconURL={iconURL}
+                main={main_data}
+                weather={weather_data}
+                sys={sys_data}
+                wind={wind_data}
                 eventEmitter={this.props.eventEmitter}/>
 
             </div>}
