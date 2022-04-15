@@ -19,7 +19,12 @@ class App extends React.Component{
   }
 
   componentDidMount() {
+    const {eventEmitter} = this.props;
+
     this.getLocationWeather();
+    eventEmitter.on("cityChanged", (data)=>{
+      this.setState({cityName: data}, ()=>this.getLocationWeather());
+    });
   }
 
   getLocationWeather(){
@@ -111,14 +116,14 @@ class App extends React.Component{
           {isLoading && <h3>Loading Weather ...</h3>}
           {!isLoading &&  
             <div className="top-section">
-          
               <TopSection
                 todays_date={todays_date}
                 location={cityName}
                 temp_c={temp_c}
                 isDay={isDay}
                 text= {text}
-                iconURL={iconURL}/>
+                iconURL={iconURL}
+                eventEmitter={this.props.eventEmitter}/>
 
             </div>}
       
