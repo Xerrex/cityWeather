@@ -9,5 +9,11 @@
 * Clone the repository.
 * Change into the cloned repository directory.
 * Install dependancies with `npm install`.
+* Create a `.env' file and add the following variables
+    ```
+    REACT_APP_API_ID=<your-value-here>
+    REACT_APP_CITYNAME=<preferred-default-city>
+    REACT_APP_UNITS="metric"
+    ```
 * Start the development server with `npm start`.
 * View project at [http://localhost:3000](http://localhost:3000) in your browser.
