@@ -1,4 +1,6 @@
 # City Weather app
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c79ae907-e71f-4e59-b08e-1769192986ab/deploy-status)](https://app.netlify.com/sites/cityweather-xerrex/deploys)
+
 * App to show the weather of a city.
 
 ## Tools used:
