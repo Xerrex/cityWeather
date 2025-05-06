@@ -58,9 +58,9 @@ export interface WeatherData {
         temp_max?: number;
       }
     | {
-        speed?: string;
-        deg?: string;
-        gust?: string;
+        speed?: number;
+        deg?: number;
+        gust?: number;
       }
       | {
         sunrise: string;

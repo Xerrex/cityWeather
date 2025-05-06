@@ -24,23 +24,23 @@ export function weatherResponseParser(response: WeatherResponse){
     }
 
 
-    const weatherdata: WeatherData[] = [
+    const weatherData: WeatherData[] = [
       {title: "Feels Like", type:"normal", value: response.main.feels_like},
-      {title: "Temperature", type:"temp", value:{
-        "temp_min": response.main.temp_min,
-        "temp_max": response.main.temp_max
-      }},
+      
       {title: "Sea Level", type:"normal", value: response.main.sea_level ?? 0},
       {title: "Ground Level",  type:"normal", value: response.main.grnd_level ?? 0},
       {title: "Humidity", type:"normal", value:response.main.humidity},
       {title: "Atmospheric Pressure", type:"normal", value: response.main.pressure},
       {title: "Visibility", type:"normal", value: response.visibility},
-      {title: "Wind", type:"wind", value: {
-        speed:"4.16m/s",
-        deg: "78%",
-        gust: "3.47m/s"
-      }}
+      {title: "Temperature", type:"temp", value:{ "temp_min": response.main.temp_min, "temp_max": response.main.temp_max }},
+      {title: "Wind", type:"wind", value: { speed:response.wind.speed, deg:response.wind.deg, gust: response.wind.gust}},
+      {title: "Sun", type:"wind", value: {
+        sunrise: getDateFromTimestamp(response.sys.sunrise, 0).time, 
+        sunset: getDateFromTimestamp(response.sys.sunset, 0).time }
+      }
     ]
+
+    return {sideData: sideContent, mainData: weatherData}
 }
 
 
@@ -57,6 +57,7 @@ function getDateFromTimestamp(timestamp: number, timezoneOffset: number){
 
   return { day, day_of_week, month, year, time, timezone };
 }
+
 
 // {
 //     coord: { lon: 36.8167, lat: -1.2833 },

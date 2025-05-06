@@ -1,8 +1,9 @@
 import React from 'react';
 import { MagnifyingGlassIcon, FireIcon, Bars3BottomLeftIcon } from '@heroicons/react/16/solid';
+import { SideContentProps } from '../lib/definitions';
 
 
-function SideContent() {
+function SideContent({data}:{data:SideContentProps}) {
   return (
     <div className="w-full flex flex-col p-2 items-center">
 
@@ -15,20 +16,20 @@ function SideContent() {
         text-gray-500 peer-focus:text-gray-900" />
       </div>
       
-      <div className="flex-grow my-auto">
+      <div className="flex-grow">
         <FireIcon className="w-[150px] h-[150px] text-amber-300"/>
 
         <div className="p-2 flex flex-col">
           <div className="flex">
-            <span className="text-8xl text-black">12</span>
+            <span className="text-8xl text-black">{data.temperature}</span>
             <span className="text-black font-bold">O</span>
             <span className="text-4xl text-black">C/F</span>
           </div>
         
           <div className="p-2 flex mt-2 items-center">
-            <span className="text-lg text-black font-bold">Monday,</span>
-            <span className="text-black ml-1">May 2025</span>
-            <span className="text-gray-500 font-bold ml-1.5">15:46</span>
+            <span className="text-lg text-black font-bold">{data.day_of_week},</span>
+            <span className="text-black ml-1">{data.day} {data.month} {data.year}</span>
+            <span className="text-gray-500 font-bold ml-1.5">{data.time} ({data.timezone})</span>
           </div>
 
           <div className="border-t border-gray-200 my-4"></div>
@@ -36,7 +37,7 @@ function SideContent() {
           <div className="p-2 flex flex-col mt-2">
             <div className="mt-2 flex">
               <Bars3BottomLeftIcon className="w-[30px] h-[30px] text-indigo-400"/>
-              <span className="text-black ml-1">Mostly Cloudy</span>
+              <span className="text-black ml-1">{data.description}</span>
             </div>
 
             <div className="mt-2 flex">
@@ -51,11 +52,13 @@ function SideContent() {
               3.59-3.59 1.41 1.41-3.59 3.59zm8.543-3.59l-1.41-1.41-3.59 3.59 1.41 1.41 3.59-3.59zm4.875 0l-1.41-1.41-3.59 
               3.59 1.41 1.41 3.59-3.59z"/></svg>
 
-              <span className="text-black ml-1">Rain - 30</span>
+              <span className="text-black ml-1">Rain - {data.rain}</span>
             </div>
           </div>
 
-          <div className="mt-60 p-10 border-1 border-gray-500 rounded-lg w-full text-black"> Nairobi, Kenya</div>
+          <div className="mt-60 p-10 border-1 border-gray-500 rounded-lg w-full text-black flex justify-center">
+            {data.city_name}, {data.country}
+          </div>
 
         </div>
       </div>
