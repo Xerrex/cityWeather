@@ -14,15 +14,26 @@ export function WeatherCard({title, type, value}: WeatherData) {
         {type==="normal" && (<p className="truncate rounded-xl bg-white px-4 py-8 text-center text-2xl">
           {typeof value === "string" || typeof value === "number" ? value : JSON.stringify(value)}</p>)}
         
-        {type==="sun" && (<p className="truncate rounded-xl bg-white px-4 py-8 text-center text-2xl">
-          Sunrise {value.sunrise} - Sunset {value.sunset}</p>)}
+        {type==="sun" && typeof value === "object" && "sunrise" in value && "sunset" in value && (
+          <div className="flex flex-col rounded-xl bg-white px-2 py-8 text-center text-lg">
+            <span>Sunrise {value.sunrise}</span>
+            <span>Sunset {value.sunset}</span>
+          </div>
+          
+        )}
 
-        {{type==="wind" && typeof value === "object" && (
-          <div className="truncate rounded-xl bg-white px-4 py-8 text-center text-2xl">
-          Speed: {value.speed.toString()}</div>)}
+        {type==="wind" && typeof value === "object" && "speed" in value && "deg" in value && "gust" in value && (
+          <div className="flex flex-col rounded-xl bg-white px-4 py-8 text-center text-xl">
+          <span>Speed: {value.speed}</span>
+          <span>Degrees: {value.deg}</span>
+          <span>Gust: {value.deg}</span>
+          </div>)}
         
-        {type==="temp" && (<p className="truncate rounded-xl bg-white px-4 py-8 text-center text-2xl">
-          {value?.speed ? value.speed : }</p>)}}
+        {type==="temp" && typeof value === "object" && "temp_min" in value && (
+          <div className="flex flex-col rounded-xl bg-white px-4 py-8 text-center text-xl">
+            <span>Low {value.temp_min}</span>
+            <span>High {value.temp_max}</span>
+          </div>)}
         
       </div>
     )

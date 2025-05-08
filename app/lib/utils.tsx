@@ -34,7 +34,7 @@ export function weatherResponseParser(response: WeatherResponse){
       {title: "Visibility", type:"normal", value: response.visibility},
       {title: "Temperature", type:"temp", value:{ "temp_min": response.main.temp_min, "temp_max": response.main.temp_max }},
       {title: "Wind", type:"wind", value: { speed:response.wind.speed, deg:response.wind.deg, gust: response.wind.gust}},
-      {title: "Sun", type:"wind", value: {
+      {title: "Sun", type:"sun", value: {
         sunrise: getDateFromTimestamp(response.sys.sunrise, 0).time, 
         sunset: getDateFromTimestamp(response.sys.sunset, 0).time }
       }

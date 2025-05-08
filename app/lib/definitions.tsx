@@ -54,8 +54,8 @@ export interface WeatherData {
     | string 
     | number 
     | {
-        temp_min?: number;
-        temp_max?: number;
+        temp_min: number;
+        temp_max: number;
       }
     | {
         speed?: number;
