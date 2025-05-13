@@ -1,5 +1,6 @@
 import { WeatherResponse, SideContentProps, WeatherData } from "./definitions";
 
+
 export function weatherResponseParser(response: WeatherResponse){
    /** Weather API response parser
     * 
@@ -25,19 +26,27 @@ export function weatherResponseParser(response: WeatherResponse){
 
 
     const weatherData: WeatherData[] = [
+      {title: "Temperature", type:"temp", value: { 
+        temp_min: response.main.temp_min, 
+        temp_max: response.main.temp_max }
+      },
       {title: "Feels Like", type:"normal", value: response.main.feels_like},
-      
-      {title: "Sea Level", type:"normal", value: response.main.sea_level ?? 0},
-      {title: "Ground Level",  type:"normal", value: response.main.grnd_level ?? 0},
       {title: "Humidity", type:"normal", value:response.main.humidity},
       {title: "Atmospheric Pressure", type:"normal", value: response.main.pressure},
+      {title: "Sea Level", type:"normal", value: response.main.sea_level ?? 0},
+      {title: "Ground Level",  type:"normal", value: response.main.grnd_level ?? 0},
+      
       {title: "Visibility", type:"normal", value: response.visibility},
-      {title: "Temperature", type:"temp", value:{ "temp_min": response.main.temp_min, "temp_max": response.main.temp_max }},
-      {title: "Wind", type:"wind", value: { speed:response.wind.speed, deg:response.wind.deg, gust: response.wind.gust}},
       {title: "Sun", type:"sun", value: {
         sunrise: getDateFromTimestamp(response.sys.sunrise, 0).time, 
         sunset: getDateFromTimestamp(response.sys.sunset, 0).time }
+      },
+      {title: "Wind", type:"wind", value: { 
+        speed:response.wind.speed, 
+        deg:response.wind.deg, 
+        gust: response.wind.gust}
       }
+      
     ]
 
     return {sideData: sideContent, mainData: weatherData}

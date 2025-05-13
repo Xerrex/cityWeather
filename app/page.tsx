@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import SideContent from './ui/SideContent';
 import MainContent from './ui/MainContent';
-import UnitSwitch from './ui/UnitSwitch';
+// import UnitSwitch from './ui/UnitSwitch';
 import {API_ID, DEFAULT_CITY, DEFAULT_UNITS, APP_ENVIRONMENT} from './lib/config';
 import { weatherResponseParser } from './lib/utils';
 import { weatherResponsePlaceholder } from './lib/placeholder';
@@ -38,16 +38,16 @@ export default async function Home() {
 
 
   return (
-    <div className="min-h-screen bg-gray-300 flex-col">
+    <div className="min-h-screen bg-gray-300 flex-col p-2">
       <main className="flex flex-col md:flex-row gap-[10px] p-2 h-full">
         <div className="bg-white rounded w-full md:w-2/5">
           <SideContent data={sideData}/>
         </div>
         
         <div className="bg-white rounded w-full md:3/5 p-4">
-          <div className="flex justify-end">
+          {/* <div className="flex justify-end">
            <UnitSwitch/> 
-          </div>
+          </div> */}
           
           <MainContent weatherData ={mainData}/>
         </div>
@@ -56,7 +56,7 @@ export default async function Home() {
       
 
       <footer className="mb-0 flex gap-[24px] flex-wrap items-center justify-center">
-        <Link href="#" className="text-black">CODE</Link>
+        <Link href="#" className="text-black">Code</Link>
         <Link href="#"className="text-black">Developer </Link>
         <Link href="#"className="text-black">Others</Link>
       </footer>
