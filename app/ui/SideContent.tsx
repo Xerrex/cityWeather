@@ -1,13 +1,13 @@
 import React from 'react';
-import { MagnifyingGlassIcon, FireIcon, Bars3BottomLeftIcon } from '@heroicons/react/16/solid';
+import Image from 'next/image';
+import { MagnifyingGlassIcon, Bars3BottomLeftIcon } from '@heroicons/react/16/solid';
 import { SideContentProps } from '../lib/definitions';
 
 
 function SideContent({data}:{data:SideContentProps}) {
   return (
-    <div className="w-full flex flex-col p-2 items-center">
-
-      <div className="relative flex flex-1 flex-shrink-0 w-80 mb-2">
+    <div className="w-full flex flex-col p-2">
+      <div className="relative flex flex-1 flex-shrink-0 w-full mb-2">
         <label htmlFor="search" className="sr-only">Search</label>
         <input className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm 
           outline-2 placeholder:text-black" placeholder="Search a city"/>
@@ -16,17 +16,17 @@ function SideContent({data}:{data:SideContentProps}) {
         text-gray-500 peer-focus:text-gray-900" />
       </div>
       
-      <div className="flex-grow">
-        <FireIcon className="w-[150px] h-[150px] text-amber-300"/>
+      <div className="flex-grow justify-items-center">
+        <Image src={data.icon} alt="Weather icon" width={200} height={200} />
 
         <div className="p-2 flex flex-col">
-          <div className="flex">
-            <span className="text-8xl text-black">{data.temperature}</span>
+          <div className="flex justify-center">
+            <span className="text-5xl md:text-7xl text-black">{data.temperature}</span>
             <span className="text-black font-bold">O</span>
             <span className="text-4xl text-black">C/F</span>
           </div>
         
-          <div className="p-2 flex mt-2 items-center">
+          <div className="p-2 flex mt-2 items-center justify-center">
             <span className="text-lg text-black font-bold">{data.day_of_week},</span>
             <span className="text-black ml-1">{data.day} {data.month} {data.year}</span>
             <span className="text-gray-500 font-bold ml-1.5">{data.time} ({data.timezone})</span>
@@ -34,7 +34,7 @@ function SideContent({data}:{data:SideContentProps}) {
 
           <div className="border-t border-gray-200 my-4"></div>
 
-          <div className="p-2 flex flex-col mt-2">
+          <div className="p-2 flex justify-evenly md:flex-col mt-2">
             <div className="mt-2 flex">
               <Bars3BottomLeftIcon className="w-[30px] h-[30px] text-indigo-400"/>
               <span className="text-black ml-1">{data.description}</span>
@@ -56,7 +56,7 @@ function SideContent({data}:{data:SideContentProps}) {
             </div>
           </div>
 
-          <div className="mt-60 p-10 border-1 border-gray-500 rounded-lg w-full text-black flex justify-center">
+          <div className="mt-10 md:mt-50 p-8 bg-gray-400 rounded-lg w-full text-white font-bold flex justify-center">
             {data.city_name}, {data.country}
           </div>
 
