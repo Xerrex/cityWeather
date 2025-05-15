@@ -55,10 +55,10 @@ export default async function Home() {
       </main>
       
 
-      <footer className="mb-0 flex gap-[24px] flex-wrap items-center justify-center">
-        <Link href="#" className="text-black">Code</Link>
-        <Link href="#"className="text-black">Developer </Link>
-        <Link href="#"className="text-black">Others</Link>
+      <footer className="mb-0 flex gap-[24px] justify-center">
+        {/* <Link href="#" className="text-black">Code</Link> */}
+        <Link href="https://xerrex.github.io/" target="_blank" className="text-black">Developer </Link>
+        {/* <Link href="#"className="text-black">Others</Link> */}
       </footer>
     </div>
   );
