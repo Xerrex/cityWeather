@@ -5,6 +5,7 @@ import MainContent from './ui/MainContent';
 import {API_ID, DEFAULT_CITY, DEFAULT_UNITS, APP_ENVIRONMENT} from './lib/config';
 import { weatherResponseParser } from './lib/utils';
 import { weatherResponsePlaceholder } from './lib/placeholder';
+import { UnitSystemKey } from './lib/definitions';
 
 
 async function getCityWeather(){
@@ -33,7 +34,7 @@ export default async function Home() {
   
   const res = await getCityWeather();
 
-  const {sideData, mainData} = weatherResponseParser(res.data, DEFAULT_UNITS);
+  const {sideData, mainData} = weatherResponseParser(res.data, DEFAULT_UNITS as UnitSystemKey);
 
 
   return (
