@@ -59,9 +59,7 @@ function SideContent({data}:{data:SideContentProps}) {
 
         </div>
       </div>
-      
-
-      
+    
     </div>
   )
 }

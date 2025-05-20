@@ -9,7 +9,7 @@ import { weatherResponsePlaceholder } from './lib/placeholder';
 
 async function getCityWeather(){
   /** Get City Weather */
-  if(APP_ENVIRONMENT === "DEV"){
+  if(APP_ENVIRONMENT !== "PROD"){
     return {"message": "Success (dev)", data: weatherResponsePlaceholder}
   }
 

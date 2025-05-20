@@ -15,13 +15,16 @@ export function weatherResponseParser(response: WeatherResponse, units:UnitSyste
     const icon_size = "@2x.png";
     const icon = `${baseIconURL}${response.weather[0].icon}${icon_size}`;
 
+
+    const selectedUnitSystem = UnitsSystem[units];
+
     const sideContent: SideContentProps = {
       icon: icon,
       main: response.weather[0].main,
       description: response.weather[0].description,
-      temperature: {value: response.main.temp, unit: UnitsSystem[units].temperature}, 
+      temperature: {value: response.main.temp, unit: selectedUnitSystem.temperature}, 
       ...getDateFromTimestamp(response.dt, response.timezone),
-      rain: {value: response.rain?.["1h"] ?? 0, unit: UnitsSystem[units].rain} ,
+      rain: {value: response.rain?.["1h"] ?? 0, unit: selectedUnitSystem.rain} ,
       coord: response.coord,
       country: response.sys.country,
       city_name: response.name
@@ -29,27 +32,34 @@ export function weatherResponseParser(response: WeatherResponse, units:UnitSyste
 
 
     const weatherData: WeatherData[] = [
-      {title: "Temperature", type:"temp", value: { 
+      {title: "Temperature", 
+        type:"temp",
+        unit: selectedUnitSystem.temperature,
+        value: { 
         temp_min: response.main.temp_min, 
-        temp_max: response.main.temp_max }
-      },
-      {title: "Feels Like", type:"normal", value: response.main.feels_like},
-      {title: "Humidity", type:"normal", value:response.main.humidity},
-      {title: "Atmospheric Pressure", type:"normal", value: response.main.pressure},
-      {title: "Sea Level", type:"normal", value: response.main.sea_level ?? 0},
-      {title: "Ground Level",  type:"normal", value: response.main.grnd_level ?? 0},
-      
-      {title: "Visibility", type:"normal", value: response.visibility},
-      {title: "Sun", type:"sun", value: {
-        sunrise: getDateFromTimestamp(response.sys.sunrise, 0).time, 
-        sunset: getDateFromTimestamp(response.sys.sunset, 0).time }
-      },
-      {title: "Wind", type:"wind", value: { 
-        speed:response.wind.speed, 
-        deg:response.wind.deg, 
-        gust: response.wind.gust}
+        temp_max: response.main.temp_max
       }
+      },
+      {title: "Feels Like", type:"normal", unit: selectedUnitSystem.temperature, value: response.main.feels_like},
+      {title: "Humidity", type:"normal", unit: selectedUnitSystem.humidity, value:response.main.humidity},
+      {title: "Atmospheric Pressure", type:"normal", unit: selectedUnitSystem.atmosphericPressure, value: response.main.pressure},
+      {title: "Sea Level", type:"normal", unit: selectedUnitSystem.seaLevel, value: response.main.sea_level ?? 0},
+      {title: "Ground Level",  type:"normal", unit: selectedUnitSystem.groundLevel, value: response.main.grnd_level ?? 0},
       
+      {title: "Visibility", type:"normal", unit: selectedUnitSystem.visibility, value: response.visibility},
+      {title: "Sun", type:"sun", 
+        value: {
+          sunrise: getDateFromTimestamp(response.sys.sunrise, 0).time, 
+          sunset: getDateFromTimestamp(response.sys.sunset, 0).time 
+        }
+      },
+      {title: "Wind", type:"wind", 
+        value: { 
+          speed: {value: response.wind.speed, unit: selectedUnitSystem.wind.speed},
+          deg: {value: response.wind.deg, unit: selectedUnitSystem.wind.deg},
+          gust: {value: response.wind.gust ?? 0, unit: selectedUnitSystem.wind.gust} 
+        }
+      }
     ]
 
     return {sideData: sideContent, mainData: weatherData}
@@ -69,36 +79,3 @@ function getDateFromTimestamp(timestamp: number, timezoneOffset: number){
 
   return { day, day_of_week, month, year, time, timezone };
 }
-
-
-// {
-//     coord: { lon: 36.8167, lat: -1.2833 },
-//     weather: [
-//       {
-//         id: 802,
-//         main: 'Clouds',
-//         description: 'scattered clouds',
-//         icon: '03d'
-//       }
-//     ],
-//     base: 'stations',
-//     main: {
-//       temp: 23.95,
-//       feels_like: 23.71,
-//       temp_min: 23.95,
-//       temp_max: 23.95,
-//       pressure: 1014,
-//       humidity: 50,
-//       sea_level: 1014,
-//       grnd_level: 840
-//     },
-//     visibility: 10000,
-//     wind: { speed: 2.46, deg: 107, gust: 2.33 },
-//     clouds: { all: 48 },
-//     dt: 1746258121,
-//     sys: { country: 'KE', sunrise: 1746242852, sunset: 1746286293 },
-//     timezone: 10800,
-//     id: 184745,
-//     name: 'Nairobi',
-//     cod: 200
-// }

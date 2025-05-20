@@ -50,17 +50,16 @@ export interface SideContentProps {
 export interface WeatherData {
   title: string;
   type: "normal" | "temp"| "wind" | "sun";
-  value: 
-    | string 
-    | number 
+  unit?: string;
+  value: string | number
     | {
         temp_min: number;
         temp_max: number;
       }
     | {
-        speed?: number;
-        deg?: number;
-        gust?: number;
+        speed?: {value: number; unit: string};
+        deg?: {value: number; unit: string};
+        gust?: {value: number; unit: string};
       }
       | {
         sunrise: string;
