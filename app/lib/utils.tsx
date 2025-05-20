@@ -1,12 +1,15 @@
-import { WeatherResponse, SideContentProps, WeatherData } from "./definitions";
+import { WeatherResponse, SideContentProps, WeatherData, 
+  UnitsSystem, UnitSystemKey} from "./definitions";
 
 
-export function weatherResponseParser(response: WeatherResponse){
+export function weatherResponseParser(response: WeatherResponse, units:UnitSystemKey){
    /** Weather API response parser
     * 
     * Parse the response of the API to 
     * fit component requirements.
     */
+    // console.log("Unit system:", UnitsSystem);
+    console.log("units:", units);
 
     const baseIconURL = "http://openweathermap.org/img/wn/";
     const icon_size = "@2x.png";
@@ -16,12 +19,12 @@ export function weatherResponseParser(response: WeatherResponse){
       icon: icon,
       main: response.weather[0].main,
       description: response.weather[0].description,
-      temperature: response.main.temp,
+      temperature: {value: response.main.temp, unit: UnitsSystem[units].temperature}, 
       ...getDateFromTimestamp(response.dt, response.timezone),
-      rain: response.rain?.["1h"] ?? 0,
+      rain: {value: response.rain?.["1h"] ?? 0, unit: UnitsSystem[units].rain} ,
       coord: response.coord,
       country: response.sys.country,
-      city_name: response.name,
+      city_name: response.name
     }
 
 

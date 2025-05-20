@@ -30,13 +30,13 @@ export interface SideContentProps {
   icon: string;
   main: string;
   description: string;
-  temperature: number
+  temperature: {value: number, unit:string},
   day: number;
   day_of_week: string;
   month: string;
   year: number;
   time: string;
-  rain?: number;
+  rain?: {value: number, unit:string};
   coord: {
     lon: number;
     lat: number;
@@ -66,4 +66,33 @@ export interface WeatherData {
         sunrise: string;
         sunset: string;
       };
+}
+
+export type UnitSystemKey = "metric" | "imperial";
+
+export const UnitsSystem = {
+  "metric":{
+    "clouds": "%",
+    "temperature": "°C",
+    "feelsLike": "°C",
+    "humidity": "%",
+    "atmosphericPressure": "hPa",
+    "seaLevel":"hPa",
+    "groundLevel": "hPa",
+    "visibility": "metres",
+    "wind": {"speed":"metre/sec", "deg":"meteorological degrees", "gust":"metre/sec"},
+    "rain": "mm"
+  },
+  "imperial":{
+     "clouds": "%",
+    "temperature":"°F",
+    "feelsLike": "°F",
+    "humidity": "%",
+    "atmosphericPressure": "hPa",
+    "seaLevel":"hPa",
+    "groundLevel": "hPa",
+    "visibility": "metres",
+    "wind": {"speed":"mph", "deg":"meteorological degrees", "gust":"miles/hour"},
+    "rain": "mm"
+  }
 }
