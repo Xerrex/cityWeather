@@ -30,13 +30,15 @@ export function WeatherCard({data}: {data: WeatherData}) {
               <span>Speed {data.value.speed?.value }</span>
               <span className="ml-1">{data.value.speed?.unit }</span>
             </div>
-            <div className="flex">
-              <span>{data.value.deg?.value}</span>
-              <span className="ml-1">{data.value.deg?.unit }</span>
-            </div>
+            
             <div className="flex">
               <span>Gust {data.value.gust?.value}</span>
               <span className="ml-1">{data.value.gust?.unit }</span>
+            </div>
+            
+            <div className="flex">
+              <span>{data.value.deg?.value}</span>
+              <span className="ml-1">{data.value.deg?.unit }</span>
             </div>
           </div>)}
         
