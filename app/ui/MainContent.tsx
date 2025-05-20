@@ -12,7 +12,7 @@ function MainContent({weatherData }: {weatherData : WeatherData[]}) {
       <div className="flex flex-wrap gap-2 justify-center">
         {weatherData && weatherData.map((data, index)=>(
           <div key={index} className="w-64">
-            <WeatherCard  title={data.title} type={data.type} value={data.value}/>
+            <WeatherCard  data={data} />
           </div>))}
       </div>
      

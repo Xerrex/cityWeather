@@ -30,13 +30,13 @@ export interface SideContentProps {
   icon: string;
   main: string;
   description: string;
-  temperature: number
+  temperature: {value: number, unit:string},
   day: number;
   day_of_week: string;
   month: string;
   year: number;
   time: string;
-  rain?: number;
+  rain?: {value: number, unit:string};
   coord: {
     lon: number;
     lat: number;
@@ -50,20 +50,48 @@ export interface SideContentProps {
 export interface WeatherData {
   title: string;
   type: "normal" | "temp"| "wind" | "sun";
-  value: 
-    | string 
-    | number 
+  unit?: string;
+  value: string | number
     | {
         temp_min: number;
         temp_max: number;
       }
     | {
-        speed?: number;
-        deg?: number;
-        gust?: number;
+        speed?: {value: number; unit: string};
+        deg?: {value: number; unit: string};
+        gust?: {value: number; unit: string};
       }
       | {
         sunrise: string;
         sunset: string;
       };
+}
+
+export type UnitSystemKey = "metric" | "imperial";
+
+export const UnitsSystem = {
+  "metric":{
+    "clouds": "%",
+    "temperature": "°C",
+    "feelsLike": "°C",
+    "humidity": "%",
+    "atmosphericPressure": "hPa",
+    "seaLevel":"hPa",
+    "groundLevel": "hPa",
+    "visibility": "metres",
+    "wind": {"speed":"metre/sec", "deg":"meteorological degrees", "gust":"metre/sec"},
+    "rain": "mm"
+  },
+  "imperial":{
+     "clouds": "%",
+    "temperature":"°F",
+    "feelsLike": "°F",
+    "humidity": "%",
+    "atmosphericPressure": "hPa",
+    "seaLevel":"hPa",
+    "groundLevel": "hPa",
+    "visibility": "metres",
+    "wind": {"speed":"mph", "deg":"meteorological degrees", "gust":"miles/hour"},
+    "rain": "mm"
+  }
 }

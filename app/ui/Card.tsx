@@ -2,36 +2,50 @@ import { WeatherData } from "../lib/definitions";
 
 
 
-export function WeatherCard({title, type, value}: WeatherData) {
+export function WeatherCard({data}: {data: WeatherData}) {
 
     return (
       <div className="rounded-xl bg-gray-200 p-2 shadow-sm text-black">
         <div className="flex p-4">
           {/* {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null} */}
-          <h3 className="ml-2 text-sm font-bold">{title}</h3>
+          <h3 className="ml-2 text-sm font-bold">{data.title}</h3>
         </div>
 
-        {type==="normal" && (<p className="truncate rounded-xl bg-white px-4 py-8 text-center text-xl">
-          {typeof value === "string" || typeof value === "number" ? value : JSON.stringify(value)}</p>)}
+          {data.type==="normal" && (<div className="flex rounded-xl bg-white px-2 py-8 justify-center">
+            <span>{typeof data.value === "string" || typeof data.value === "number" ? data.value : JSON.stringify(data.value)}</span>
+            <span className="ml-1">{data.unit}</span>
+          </div>)}
         
-        {type==="sun" && typeof value === "object" && "sunrise" in value && "sunset" in value && (
+        {data.type==="sun" && typeof data.value === "object" && "sunrise" in data.value && "sunset" in data.value && (
           <div className="flex flex-col rounded-xl bg-white px-2 py-8 text-center">
-            <span>&#9728; Sunrise {value.sunrise}</span>
-            <span>&#9788; Sunset {value.sunset}</span>
+            <span>&#9728; Sunrise {data.value.sunrise}</span>
+            <span>&#9788; Sunset {data.value.sunset}</span>
           </div>
           
         )}
 
-        {type==="wind" && typeof value === "object" && "speed" in value && "deg" in value && "gust" in value && (
-          <div className="flex flex-col rounded-xl bg-white px-4 py-8 text-center">
-          <span>Speed {value.speed}</span>
-          <span>Degrees {value.deg}</span>
-          <span>Gust {value.deg}</span>
+        {data.type==="wind" && typeof data.value === "object" && "speed" in data.value && "deg" in data.value && "gust" in data.value && (
+          <div className="flex flex-col items-center rounded-xl bg-white px-4 py-8">
+            <div className="flex">
+              <span>Speed {data.value.speed?.value }</span>
+              <span className="ml-1">{data.value.speed?.unit }</span>
+            </div>
+            
+            <div className="flex">
+              <span>Gust {data.value.gust?.value}</span>
+              <span className="ml-1">{data.value.gust?.unit }</span>
+            </div>
+            
+            <div className="flex">
+              <span>{data.value.deg?.value}</span>
+              <span className="ml-1">{data.value.deg?.unit }</span>
+            </div>
           </div>)}
         
-        {type==="temp" && typeof value === "object" && "temp_min" in value && (
-          <div className="flex flex-col rounded-xl bg-white px-4 py-8 text-center text-xl">
-            <span>{value.temp_min} - {value.temp_max}</span>
+        {data.type==="temp" && typeof data.value === "object" && "temp_min" in data.value && (
+          <div className="flex justify-center rounded-xl bg-white px-4 py-8 text-center">
+            <span>{data.value.temp_min} - {data.value.temp_max}</span>
+             <span className="ml-1">{data.unit}</span> 
           </div>)}
         
       </div>
