@@ -14,9 +14,9 @@ function CitySearch() {
   const handleSearch = useDebouncedCallback((cityName)=>{
     const params = new URLSearchParams(searchParams);
     if(cityName){
-      params.set('query', cityName);
+      params.set('city', cityName);
     }else{
-       params.delete('query');
+       params.delete('city');
     }
     replace(`${pathname}?${params.toString()}`);
   }, 300);
