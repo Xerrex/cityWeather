@@ -6,12 +6,13 @@ import CitySearch from './ui/CitySearch';
 import { weatherResponseParser } from './lib/utils';
 import { UnitSystemKey } from './lib/definitions';
 import { getCityWeather } from './lib/actions';
+import { DEFAULT_CITY, DEFAULT_UNITS } from './lib/config';
 
 
 
-export default async function Page(props: {searchParams: Promise<{city: string; page?: string;}>;}) {
+export default async function Page(props: {searchParams?: Promise<{city?: string; page?: string;}>;}) {
   const searchParams = await props.searchParams;
-  const cityName = searchParams.city;
+  const cityName = searchParams?.city || DEFAULT_CITY;
   
   // if( searchParams?.city === null || searchParams?.city === undefined){
   //   cityName = DEFAULT_CITY;
@@ -20,7 +21,7 @@ export default async function Page(props: {searchParams: Promise<{city: string; 
   // }
 
   const res = await getCityWeather(cityName);
-  console.log(`getting weather data for ${cityName}`,res);
+  // console.log(`getting weather data for ${cityName}`,res);
 
   // if(res.data === null){
   //   const params = new URLSearchParams(searchParams)

@@ -8,7 +8,6 @@ import { APP_ENVIRONMENT, API_ID, DEFAULT_UNITS } from "./config";
 export async function getCityWeather(cityName: string){
   /** Get City Weather */
   
-
   if(APP_ENVIRONMENT !== "PROD"){
     return {"message": "Success (dev)", data: weatherResponsePlaceholder}
   }
@@ -21,11 +20,10 @@ export async function getCityWeather(cityName: string){
 
   const response = await axios.get(url);
   if(response.status === 200){
-    const data = response.data;
-    return {"message": "Success", data: data, "error":null}
+    const data = await response.data;
+    return {"message": "Success", "data": data, "error":null}
   }else{
-    // console.log("response error", response);
-    return {"message": `${response.statusText} ${response.status}`, data: null, "error":null}
+    return {"message": `${response.statusText} ${response.status}`, "data": null, "error":null}
   }
 
   // try {

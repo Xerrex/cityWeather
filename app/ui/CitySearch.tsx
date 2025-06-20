@@ -17,8 +17,8 @@ function CitySearch() {
     if(cityName){
       params.set('city', cityName);
     }else{
-      //  params.delete('city');
-      params.set('city', DEFAULT_CITY);
+      params.delete('city');
+      // params.set('city', DEFAULT_CITY);
     }
     replace(`${pathname}?${params.toString()}`);
   }, 300);
