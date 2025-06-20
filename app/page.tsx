@@ -2,7 +2,6 @@ import Link from 'next/link';
 import SideContent from './ui/SideContent';
 import MainContent from './ui/MainContent';
 import CitySearch from './ui/CitySearch';
-// import {DEFAULT_CITY, DEFAULT_UNITS} from './lib/config';
 import { weatherResponseParser } from './lib/utils';
 import { UnitSystemKey } from './lib/definitions';
 import { getCityWeather } from './lib/actions';
@@ -13,21 +12,15 @@ import { DEFAULT_CITY, DEFAULT_UNITS } from './lib/config';
 export default async function Page(props: {searchParams?: Promise<{city?: string; page?: string;}>;}) {
   const searchParams = await props.searchParams;
   const cityName = searchParams?.city || DEFAULT_CITY;
+  let res;
   
-  // if( searchParams?.city === null || searchParams?.city === undefined){
-  //   cityName = DEFAULT_CITY;
-  // }else{
-  //   cityName = searchParams.city
-  // }
+  res = await getCityWeather(cityName);
 
-  const res = await getCityWeather(cityName);
-  // console.log(`getting weather data for ${cityName}`,res);
-
-  // if(res.data === null){
-  //   const params = new URLSearchParams(searchParams)
-  //   params.set('city', DEFAULT_CITY);
-  //   res = await getCityWeather(DEFAULT_CITY);
-  // }
+  if(res.data === null){
+    const params = new URLSearchParams(searchParams)
+    params.set('city', DEFAULT_CITY);
+    res = await getCityWeather(DEFAULT_CITY);
+  }
 
   
   const {sideData, mainData} = weatherResponseParser(res.data, DEFAULT_UNITS as UnitSystemKey);
