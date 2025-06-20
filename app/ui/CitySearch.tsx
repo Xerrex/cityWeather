@@ -3,7 +3,7 @@ import React from 'react';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
-import { DEFAULT_CITY } from '../lib/config';
+// import { DEFAULT_CITY } from '../lib/config';
 
 
 function CitySearch() {
