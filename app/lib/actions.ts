@@ -1,4 +1,4 @@
-'use server'
+// 'use server'
 import axios from "axios";
 import { weatherResponsePlaceholder } from "./placeholder";
 import { APP_ENVIRONMENT, API_ID, DEFAULT_UNITS } from "./config";
@@ -19,20 +19,29 @@ export async function getCityWeather(cityName: string){
   const params = `q=${cityName.toUpperCase()}&appid=${API_ID}&units=${DEFAULT_UNITS}`;
   const url = `${base_api_url}${params}`;
 
-  try {
-    const response = await axios.get(url);
-
-    if(response.status === 200){
-      const data = await response.data;
-      return {"message": "Success", data: data}
-    }else{
-      return {"message": `${response.statusText} ${response.status}`, data: null}
-    }
-
-  } catch (error) {
-    console.log("Getting City Weather error", error);
-    // console.error("Getting City Weather error", error);
-    return {"message": "error", data: null}
+  const response = await axios.get(url);
+  if(response.status === 200){
+    const data = response.data;
+    return {"message": "Success", data: data, "error":null}
+  }else{
+    // console.log("response error", response);
+    return {"message": `${response.statusText} ${response.status}`, data: null, "error":null}
   }
+
+  // try {
+  //   const response = await axios.get(url);
+
+  //   if(response.status === 200){
+  //     const data = await response.data;
+  //     return {"message": "Success", data: data, "error":null}
+  //   }else{
+  //     // console.log("response error", response);
+  //     return {"message": `${response.statusText} ${response.status}`, data: null, "error":null}
+  //   }
+
+  // } catch (error) {
+  //   // console.log("Error getting city weather", error);
+  //   return {"message": "Error", data: null, "error":error}
+  // }
 }
 
