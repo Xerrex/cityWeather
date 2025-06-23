@@ -25,21 +25,5 @@ export async function getCityWeather(cityName: string){
   }else{
     return {"message": `${response.statusText} ${response.status}`, "data": null, "error":null}
   }
-
-  // try {
-  //   const response = await axios.get(url);
-
-  //   if(response.status === 200){
-  //     const data = await response.data;
-  //     return {"message": "Success", data: data, "error":null}
-  //   }else{
-  //     // console.log("response error", response);
-  //     return {"message": `${response.statusText} ${response.status}`, data: null, "error":null}
-  //   }
-
-  // } catch (error) {
-  //   // console.log("Error getting city weather", error);
-  //   return {"message": "Error", data: null, "error":error}
-  // }
 }
 

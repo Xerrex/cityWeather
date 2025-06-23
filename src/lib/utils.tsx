@@ -1,5 +1,5 @@
-import { WeatherResponse, SideContentProps, WeatherData, 
-  UnitsSystem, UnitSystemKey} from "./definitions";
+import { type WeatherResponse, type SideContentProps, type WeatherData, 
+  UnitsSystem, type UnitSystemKey} from "./definitions";
 
 
 export function weatherResponseParser(response: WeatherResponse, units:UnitSystemKey){
