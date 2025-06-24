@@ -1,26 +1,46 @@
-import React from 'react';
-import Image from 'next/image';
 import { Bars3BottomLeftIcon } from '@heroicons/react/16/solid';
-import { SideContentProps } from '../lib/definitions';
 
 
-function SideContent({data}:{data:SideContentProps}) {
+export interface SideContentProps {
+  icon: string;
+  main: string;
+  description: string;
+  temperature: {value: number, unit:string},
+  day: number;
+  day_of_week: string;
+  month: string;
+  year: number;
+  time: string;
+  rain?: {value: number, unit:string};
+  coord: {
+    lon: number;
+    lat: number;
+  }
+  country: string;
+  city_name: string;
+  timezone: string;
+}
+
+
+function SideContent({data}:{data:SideContentProps| null}) {
   return (
     <div className="w-full flex flex-col p-2">
       <div className="flex-grow justify-items-center">
-        <Image src={data.icon} alt="Weather icon" width={200} height={200} />
+        <div className="mx-auto justify-items-center bg-slate-50">
+          <img src={data?.icon} alt="Weather icon" width={200} height={200} />
+        </div>
+        
 
-        <div className="p-2 flex flex-col">
+        <div className="mt-2 p-2 flex flex-col">
           <div className="flex justify-center">
-            <span className="text-5xl md:text-7xl text-black">{data.temperature.value}</span>
-            <span className="text-black text-4xl font-bold">{data.temperature.unit}</span>
-            {/* <span className="text-4xl text-black">C/F</span> */}
+            <span className="text-5xl md:text-7xl text-black">{data?.temperature.value}</span>
+            <span className="text-black text-4xl font-bold">{data?.temperature.unit}</span>
           </div>
         
-          <div className="p-2 flex mt-2 items-center justify-center">
-            <span className="text-lg text-black font-bold">{data.day_of_week},</span>
-            <span className="text-black ml-1">{data.day} {data.month} {data.year}</span>
-            <span className="text-gray-500 font-bold ml-1.5">{data.time} ({data.timezone})</span>
+          <div className="flex p-2  mt-2 items-center justify-center">
+            <span className="text-lg text-black font-bold">{data?.day_of_week},</span>
+            <span className="text-black ml-1">{data?.day} {data?.month} {data?.year}</span>
+            <span className="text-gray-500 font-bold ml-1.5">{data?.time} ({data?.timezone})</span>
           </div>
 
           <div className="border-t border-gray-200 my-4"></div>
@@ -28,11 +48,11 @@ function SideContent({data}:{data:SideContentProps}) {
           <div className="p-2 flex justify-evenly md:flex-col mt-2">
             <div className="mt-2 flex">
               <Bars3BottomLeftIcon className="w-[30px] h-[30px] text-indigo-400"/>
-              <span className="text-black ml-1">{data.description}</span>
+              <span className="text-black font-bold ml-1">{data?.description.toUpperCase()}</span>
             </div>
 
            <div className="mt-2 flex">
-              {data.rain ? (
+              {data?.rain ? (
                 <>
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" className="text-indigo-500 fill-current">
                   <path d="M20.422 8.516c-.178-3.233-3.031-5.778-6.432-5.492-1.087-1.239-2.693-2.024-4.49-2.024-3.172 0-5.754 
@@ -45,8 +65,8 @@ function SideContent({data}:{data:SideContentProps}) {
                   3.59-3.59 1.41 1.41-3.59 3.59zm8.543-3.59l-1.41-1.41-3.59 3.59 1.41 1.41 3.59-3.59zm4.875 0l-1.41-1.41-3.59 
                   3.59 1.41 1.41 3.59-3.59z"/></svg>
 
-                  <span className="text-black ml-1">Rain - {data.rain.value}</span>
-                  <span className="text-black ml-1">{data.rain.unit}</span>
+                  <span className="text-black font-bold ml-1">Rain - {data.rain.value}</span>
+                  <span className="text-black font-bold ml-1">{data.rain.unit}</span>
                 </>
               ):(<span className="text-black ml-1">Rain data unavailable</span>)}
              
@@ -54,7 +74,7 @@ function SideContent({data}:{data:SideContentProps}) {
           </div> 
 
           <div className="mt-10 md:mt-50 p-8 bg-gray-400 rounded-lg w-full text-white font-bold flex justify-center">
-            {data.city_name}, {data.country}
+            {data?.city_name}, {data?.country}
           </div>
 
         </div>

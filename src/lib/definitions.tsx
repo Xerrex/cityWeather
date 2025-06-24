@@ -26,25 +26,25 @@ export interface WeatherResponse {
 }
 
 
-export interface SideContentProps {
-  icon: string;
-  main: string;
-  description: string;
-  temperature: {value: number, unit:string},
-  day: number;
-  day_of_week: string;
-  month: string;
-  year: number;
-  time: string;
-  rain?: {value: number, unit:string};
-  coord: {
-    lon: number;
-    lat: number;
-  }
-  country: string;
-  city_name: string;
-  timezone: string;
-}
+// export interface SideContentProps {
+//   icon: string;
+//   main: string;
+//   description: string;
+//   temperature: {value: number, unit:string},
+//   day: number;
+//   day_of_week: string;
+//   month: string;
+//   year: number;
+//   time: string;
+//   rain?: {value: number, unit:string};
+//   coord: {
+//     lon: number;
+//     lat: number;
+//   }
+//   country: string;
+//   city_name: string;
+//   timezone: string;
+// }
 
 
 export interface WeatherData {

@@ -1,14 +1,13 @@
-import React from 'react';
 import {WeatherCard} from "./Card";
-import { WeatherData } from '../lib/definitions';
+import { type WeatherData } from '../lib/definitions';
 
 
-function MainContent({weatherData }: {weatherData : WeatherData[]}) {
+function MainContent({weatherData }: {weatherData : WeatherData[] | null}) {
   
 
   return (
     <div className="p-4">
-      <h1 className="text-black font-bold text-3xl mt-10 mb-10">Current Highlights</h1>
+      <h1 className="text-black font-bold text-3xl mt-10 mb-10">Highlights</h1>
       <div className="flex flex-wrap gap-2 justify-center">
         {weatherData && weatherData.map((data, index)=>(
           <div key={index} className="w-64">
