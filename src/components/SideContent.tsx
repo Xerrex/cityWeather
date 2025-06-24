@@ -26,7 +26,7 @@ function SideContent({data}:{data:SideContentProps| null}) {
   return (
     <div className="w-full flex flex-col p-2">
       <div className="flex-grow justify-items-center">
-        <div className="mx-auto w-[150px] h-[150px] justify-items-center bg-slate-700">
+        <div className="mx-auto justify-items-center bg-slate-50">
           <img src={data?.icon} alt="Weather icon" width={200} height={200} />
         </div>
         

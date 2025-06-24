@@ -23,7 +23,6 @@ function App() {
   useEffect(()=>{
     getCityWeather(city)
     .then((resData)=>{
-      console.log("Weather", resData);
       setWeatherRes(resData)
     })
   },[city])
