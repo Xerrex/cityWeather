@@ -30,7 +30,6 @@ function App() {
 
 
   useEffect(() => {
-    // setCity(DEFAULT_CITY)
     if (weatherRes && weatherRes.data && weatherRes.units) {
       const { sideData, mainData } = weatherResponseParser( weatherRes.data, weatherRes.units as UnitSystemKey);
       setSideDataParsed(sideData);

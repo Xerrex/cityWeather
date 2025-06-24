@@ -11,11 +11,12 @@ export async function getCityWeather(cityName: string){
     return {"message": "Success (dev)", data: weatherResponsePlaceholder, "units": DEFAULT_UNITS as UnitSystemKey,}
   }
 
-//   const city = cityName ?? DEFAULT_CITY;
+  //   const city = cityName ?? DEFAULT_CITY;
   const base_api_url ="https://api.openweathermap.org/data/2.5/weather?";
   
   const params = `q=${cityName.toUpperCase()}&appid=${API_ID}&units=${DEFAULT_UNITS}`;
   const url = `${base_api_url}${params}`;
+
 
   // const response = await axios.get(url);
   const response = await fetch(url);
@@ -33,5 +34,6 @@ export async function getCityWeather(cityName: string){
       "units": DEFAULT_UNITS as UnitSystemKey
     }
   }
+    
 }
 
