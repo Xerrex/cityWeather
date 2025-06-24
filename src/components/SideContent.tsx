@@ -37,7 +37,7 @@ function SideContent({data}:{data:SideContentProps| null}) {
             <span className="text-black text-4xl font-bold">{data?.temperature.unit}</span>
           </div>
         
-          <div className="p-2 flex mt-2 items-center justify-center">
+          <div className="flex p-2  mt-2 items-center justify-center">
             <span className="text-lg text-black font-bold">{data?.day_of_week},</span>
             <span className="text-black ml-1">{data?.day} {data?.month} {data?.year}</span>
             <span className="text-gray-500 font-bold ml-1.5">{data?.time} ({data?.timezone})</span>
