@@ -5,6 +5,7 @@ import { weatherResponseParser } from './lib/utils';
 import { type WeatherResponse, type UnitSystemKey, type WeatherData } from './lib/definitions';
 import SideContent, {type SideContentProps} from './components/SideContent';
 import MainContent from './components/MainContent';
+import CitySearch from './components/CitySearch';
 
 
 type WeatherResType = {
@@ -29,7 +30,6 @@ function App() {
 
 
   useEffect(() => {
-    setCity(DEFAULT_CITY)
     if (weatherRes && weatherRes.data && weatherRes.units) {
       const { sideData, mainData } = weatherResponseParser( weatherRes.data, weatherRes.units as UnitSystemKey);
       setSideDataParsed(sideData);
@@ -46,7 +46,7 @@ function App() {
           {}
           <div className="bg-white rounded w-full md:w-2/5">
             <div className="mx-auto mt-4 w-3/5">
-              {/* <CitySearch /> */}
+              <CitySearch setCity={setCity}/>
             </div>
             
             <SideContent data={sideDataParsed}/>
