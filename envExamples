@@ -1,0 +1,5 @@
+VITE_APP_ENVIRONMENT=<-PROD-or-DEV->
+VITE_API_ID=<your-api-id>
+VITE_DEFAULT_CITY=<your-default-city>
+VITE_DEFAULT_UNITS=<metric-or-imperial>
+
