@@ -1,54 +1,51 @@
-# React + TypeScript + Vite
+# City Weather
+- Show city Weather
+- [view app here](https://cityweather-xerrex.netlify.app/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tools used
+* [Nodejs & npm](https://nodejs.org/en)
+* [React + Vite](https://vite.dev/guide/)
+* [Typescript](https://www.typescriptlang.org/)
+* [Tailwind Css](https://tailwindcss.com/)
+* [Open Weather](https://openweathermap.org/) - Provides the API
+* [Netifly](https://www.netlify.com/) - The deployment platform.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Local Setup
+1. Clone the code from the repo
+```
+git clone <repo-url>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. Change into the cloned repo folder
 ```
+cd cityWeather
+```
+
+3. Install the node modules
+```
+npm install
+```
+
+4. Get your api key from OpenWeather API for [current weather API](https://openweathermap.org/current)
+
+5. Copy `envExamples` to `.env` and edit values.
+```
+cp envExamples .env
+```
+
+6. Run the app and follow console directives to access the app on browser
+```
+npm run dev
+```
+
+7. To view production build
+    1. Build 
+    ```
+    npm run build
+    ```
+    
+    2. Preview: `follow console directives to view in browser`
+    ```
+    npm run preview
+    ```
